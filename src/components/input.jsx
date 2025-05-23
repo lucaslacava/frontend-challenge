@@ -10,6 +10,7 @@ const Input = ({
   required = false,
   name,
   id,
+  label,
   ...props
 }) => {
   return (
@@ -26,6 +27,7 @@ const Input = ({
         id={id}
         {...props}
       />
+      {label && <label htmlFor={id}>{label}</label>}
     </div>
   );
 };
