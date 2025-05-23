@@ -43,12 +43,12 @@ export const Confirmation = () => {
       aria-busy={isLoading}
     >
       <Title>Confirmation</Title>
-      <ul className="list-disc pl-6">
+      <ul className="list-disc pl-6 w-full">
         <li>
-          <strong>Name:</strong> {formData.name}
+          <strong>First Name:</strong> {formData.name}
         </li>
         <li>
-          <strong>Email:</strong> {formData.email}
+          <strong>E-mail:</strong> {formData.email}
         </li>
         <li>
           <strong>Password:</strong>
@@ -59,7 +59,7 @@ export const Confirmation = () => {
           {capitalizeFirstLetter(formData.color)}
         </li>
         <li>
-          <strong>Accepted Terms:</strong>
+          <strong>Terms and Conditions:</strong>
           {formData.terms ? "Agreed" : "Disagreed"}
         </li>
       </ul>

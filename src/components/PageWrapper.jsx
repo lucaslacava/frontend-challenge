@@ -1,3 +1,4 @@
+import { ArrowLeft, ArrowRight, Send } from "lucide-react";
 import { Button } from "./ui/button";
 import { Spinner } from "./ui/spinner";
 
@@ -20,6 +21,7 @@ export const PageWrapper = ({
         <div className="flex space-x-4 mt-4 justify-start w-full">
           {onBack && (
             <Button onClick={onBack} disabled={isLoading}>
+              <ArrowLeft className="size-4" />
               Back
             </Button>
           )}
@@ -31,7 +33,10 @@ export const PageWrapper = ({
                   Loading...
                 </>
               ) : (
-                "Next"
+                <>
+                  Next
+                  <ArrowRight className="size-4" />
+                </>
               )}
             </Button>
           )}
@@ -43,7 +48,10 @@ export const PageWrapper = ({
                   Submitting...
                 </>
               ) : (
-                "Submit"
+                <>
+                  Submit
+                  <Send className="size-4" />
+                </>
               )}
             </Button>
           )}

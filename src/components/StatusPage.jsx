@@ -1,5 +1,5 @@
 import { Button } from "@/components/ui/button";
-import { CheckCircle, XCircle } from "lucide-react";
+import { CheckCircle, RotateCcw, XCircle } from "lucide-react";
 import { useNavigate } from "react-router-dom";
 import { useForm } from "../context/FormContext";
 
@@ -23,7 +23,12 @@ export const StatusPage = ({ type, title, message, onButtonClick }) => {
           <p className="text-lg">{message}</p>
         </div>
       </div>
-      <Button onClick={onButtonClick ?? handleButtonClick}>Restart</Button>
+      <div className="mt-20">
+        <Button onClick={onButtonClick ?? handleButtonClick}>
+          Restart
+          <RotateCcw className="size-4" />
+        </Button>
+      </div>
     </main>
   );
 };
