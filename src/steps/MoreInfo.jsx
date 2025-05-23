@@ -112,7 +112,7 @@ export const MoreInfo = () => {
               onClick={(e) => e.stopPropagation()}
               className="underline text-blue-600 hover:text-blue-800"
             >
-              terms and conditions
+              terms and conditions.
             </a>
           </label>
         </div>

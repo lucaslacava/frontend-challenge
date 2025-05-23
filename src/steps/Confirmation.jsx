@@ -45,13 +45,13 @@ export const Confirmation = () => {
       <Title>Confirmation</Title>
       <ul className="list-disc pl-6 w-full">
         <li>
-          <strong>First Name:</strong> {formData.name}
+          <strong>First Name: </strong> {formData.name}
         </li>
         <li>
-          <strong>E-mail:</strong> {formData.email}
+          <strong>E-mail: </strong> {formData.email}
         </li>
         <li>
-          <strong>Password:</strong>
+          <strong>Password: </strong>
           {formData.password && "•".repeat(formData.password.length)}
         </li>
         <li>
@@ -59,7 +59,7 @@ export const Confirmation = () => {
           {capitalizeFirstLetter(formData.color)}
         </li>
         <li>
-          <strong>Terms and Conditions:</strong>
+          <strong>Terms and Conditions: </strong>
           {formData.terms ? "Agreed" : "Disagreed"}
         </li>
       </ul>
