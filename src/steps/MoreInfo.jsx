@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useEffect, useState, useCallback } from "react";
 import {
   Select,
   SelectTrigger,
@@ -13,24 +13,26 @@ import { Spinner } from "@/components/ui/Spinner";
 import { useForm } from "../context/FormContext";
 import { useNavigate } from "react-router-dom";
 import { capitalizeFirstLetter } from "../lib/utils";
-
-const COLORS_API = "http://localhost:3001/api/colors";
+import { COLORS_API } from "../api";
 
 export const MoreInfo = () => {
-  const { formData, setFormData } = useForm();
   const navigate = useNavigate();
+  const { formData, setFormData, colorOptions, setColorOptions } = useForm();
 
-  const [selectedValue, setSelectedValue] = useState(
-    formData.favoriteColor || ""
-  );
-  const [acceptedTerms, setAcceptedTerms] = useState(
-    formData.acceptedTerms || false
-  );
-  const [colorOptions, setColorOptions] = useState([]);
-  const [isLoading, setIsLoading] = useState(true);
+  const [isLoading, setIsLoading] = useState(colorOptions.length === 0);
+
+  const [selectedColor, setSelectedColor] = useState(formData.color || "");
+  const [acceptedTerms, setAcceptedTerms] = useState(formData.terms || false);
 
   useEffect(() => {
+    if (colorOptions.length > 0) {
+      setIsLoading(false);
+      return;
+    }
+
     const fetchColorOptions = async () => {
+      setIsLoading(true);
+
       try {
         const response = await fetch(COLORS_API);
         const data = await response.json();
@@ -40,31 +42,44 @@ export const MoreInfo = () => {
         }));
 
         setColorOptions(sanitizedOptions);
-        setIsLoading(false);
       } catch (error) {
         console.error(error);
+      } finally {
+        setIsLoading(false);
       }
     };
     fetchColorOptions();
-  }, []);
+  }, [colorOptions, setColorOptions]);
 
-  const handleNextClick = () => {
+  const handleSubmit = (e) => {
+    e.preventDefault();
     setFormData((prev) => ({
       ...prev,
-      color: selectedValue,
+      color: selectedColor,
       terms: acceptedTerms,
     }));
     navigate("/confirmation");
   };
 
+  const handleTermsChange = useCallback(
+    (checked) => setAcceptedTerms(!!checked),
+    []
+  );
+
+  const isNextDisabled = !selectedColor || !acceptedTerms || isLoading;
+
   return (
-    <>
-      <PageWrapper onNext={handleNextClick} onBack={() => navigate("/")}>
+    <form onSubmit={handleSubmit} className="w-full space-y-2">
+      <PageWrapper
+        onNext={handleSubmit}
+        onBack={() => navigate("/")}
+        isNextDisabled={isNextDisabled}
+      >
         <Title>Additional Info</Title>
         <div className="w-full mb-4">
           <Select
-            value={selectedValue}
-            onValueChange={setSelectedValue}
+            value={selectedColor}
+            onValueChange={setSelectedColor}
             disabled={isLoading}
           >
             <SelectTrigger className="w-full">
@@ -88,12 +103,9 @@ export const MoreInfo = () => {
           <Checkbox
             id="terms"
             checked={acceptedTerms}
-            onCheckedChange={(checked) => setAcceptedTerms(!!checked)}
+            onCheckedChange={handleTermsChange}
           />
-          <label
-            htmlFor="terms"
-            className="text-sm font-medium leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70"
-          >
+          <label htmlFor="terms" className="text-sm font-medium">
             I agree to{" "}
             <a
               href="#"
@@ -105,6 +117,6 @@ export const MoreInfo = () => {
           </label>
         </div>
       </PageWrapper>
-    </>
+    </form>
   );
 };

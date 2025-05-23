@@ -5,48 +5,59 @@ import { Input } from "../components/ui/input";
 import { PageWrapper } from "../components/PageWrapper";
 import { Title } from "../components/Title";
 import { useForm } from "../context/FormContext";
+import { isValidEmail } from "../lib/utils";
 
 export const PersonalInfo = () => {
-  const [name, setName] = useState("");
-  const [email, setEmail] = useState("");
-  const [password, setPassword] = useState("");
-
-  const { setFormData } = useForm();
-
   const navigate = useNavigate();
+  const { setFormData, formData } = useForm();
 
-  const handleNextClick = () => {
+  const [name, setName] = useState(formData.name || "");
+  const [email, setEmail] = useState(formData.email || "");
+  const [password, setPassword] = useState(formData.password || "");
+
+  const isNextDisabled = !name || !isValidEmail(email) || !password;
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    if (isNextDisabled) return;
     setFormData((prev) => ({
       ...prev,
       name,
       email,
       password,
     }));
-
     navigate("/more-info");
   };
 
   return (
-    <div>
-      <PageWrapper onNext={handleNextClick}>
+    <form onSubmit={handleSubmit} className="w-full space-y-2">
+      <PageWrapper onNext={handleSubmit} isNextDisabled={isNextDisabled}>
         <Title>Sign Up</Title>
         <Input
           placeholder="First name"
           value={name}
           onChange={(e) => setName(e.target.value)}
+          required
         />
         <Input
           placeholder="E-mail"
           value={email}
           onChange={(e) => setEmail(e.target.value)}
+          aria-invalid={email && !isValidEmail(email)}
+          required
         />
+        {email && !isValidEmail(email) && (
+          <p className="text-red-500 text-xs text-left w-full">
+            Please enter a valid email address
+          </p>
+        )}
         <Input
           placeholder="Password"
           value={password}
           type="password"
           onChange={(e) => setPassword(e.target.value)}
+          required
         />
       </PageWrapper>
-    </div>
+    </form>
   );
 };

@@ -7,41 +7,48 @@ export const PageWrapper = ({
   onBack,
   onSubmit,
   isLoading,
+  isNextDisabled,
+  ...props
 }) => {
   return (
-    <main className="flex flex-col items-center justify-center gap-y-4 p-4">
-      {children}
-      <div className="flex space-x-4 mt-4 justify-start w-full">
-        {onBack && (
-          <Button onClick={onBack} disabled={isLoading}>
-            Back
-          </Button>
-        )}
-        {onNext && (
-          <Button onClick={onNext} disabled={isLoading}>
-            {isLoading ? (
-              <>
-                <Spinner className="mr-2 h-4 w-4" />
-                Loading...
-              </>
-            ) : (
-              "Next"
-            )}
-          </Button>
-        )}
-        {onSubmit && (
-          <Button onClick={onSubmit} disabled={isLoading}>
-            {isLoading ? (
-              <>
-                <Spinner className="mr-2 h-4 w-4" />
-                Submitting...
-              </>
-            ) : (
-              "Submit"
-            )}
-          </Button>
-        )}
+    <div
+      className="min-h-screen flex items-center justify-center p-4"
+      {...props}
+    >
+      <div className="w-full max-w-md flex flex-col items-center gap-y-4">
+        {children}
+        <div className="flex space-x-4 mt-4 justify-start w-full">
+          {onBack && (
+            <Button onClick={onBack} disabled={isLoading}>
+              Back
+            </Button>
+          )}
+          {onNext && (
+            <Button onClick={onNext} disabled={isLoading || isNextDisabled}>
+              {isLoading ? (
+                <>
+                  <Spinner className="mr-2 h-4 w-4" />
+                  Loading...
+                </>
+              ) : (
+                "Next"
+              )}
+            </Button>
+          )}
+          {onSubmit && (
+            <Button onClick={onSubmit} disabled={isLoading}>
+              {isLoading ? (
+                <>
+                  <Spinner className="mr-2 h-4 w-4" />
+                  Submitting...
+                </>
+              ) : (
+                "Submit"
+              )}
+            </Button>
+          )}
+        </div>
       </div>
-    </main>
+    </div>
   );
 };

@@ -1,17 +1,18 @@
 import { Button } from "@/components/ui/button";
 import { CheckCircle, XCircle } from "lucide-react";
 import { useNavigate } from "react-router-dom";
+import { useForm } from "../context/FormContext";
 
-export const StatusPage = ({
-  type,
-  title,
-  message,
-  buttonText,
-  onButtonClick,
-}) => {
+export const StatusPage = ({ type, title, message, onButtonClick }) => {
   const navigate = useNavigate();
   const Icon = type === "success" ? CheckCircle : XCircle;
   const iconColor = type === "success" ? "text-green-600" : "text-red-600";
+  const { resetForm } = useForm();
+
+  const handleButtonClick = () => {
+    navigate("/");
+    resetForm();
+  };
 
   return (
     <main className="flex flex-col justify-center h-screen p-4 space-y-4">
@@ -22,7 +23,7 @@ export const StatusPage = ({
           <p className="text-lg">{message}</p>
         </div>
       </div>
-      <Button onClick={onButtonClick ?? (() => navigate("/"))}>Restart</Button>
+      <Button onClick={onButtonClick ?? handleButtonClick}>Restart</Button>
     </main>
   );
 };
