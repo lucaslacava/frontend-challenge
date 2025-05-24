@@ -45,7 +45,7 @@ export const PageWrapper = ({
             </Button>
           )}
           {onSubmit && (
-            <Button onClick={onSubmit} disabled={isLoading}>
+            <Button onClick={onSubmit} disabled={isLoading} type="submit">
               {isLoading ? (
                 <>
                   <Spinner className="mr-2 h-4 w-4" />
