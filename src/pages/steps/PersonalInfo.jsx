@@ -1,11 +1,10 @@
 import { useNavigate } from "react-router-dom";
 import { useState } from "react";
-import { Button } from "../components/ui/button";
-import { Input } from "../components/ui/input";
-import { PageWrapper } from "../components/PageWrapper";
-import { Title } from "../components/Title";
-import { useForm } from "../context/FormContext";
-import { isValidEmail } from "../lib/utils";
+import { Input } from "@/components/ui/input";
+import { PageWrapper } from "@/components/layout/PageWrapper";
+import { Title } from "@/components/layout/Title";
+import { useForm } from "@/context/FormContext";
+import { isValidEmail } from "@/lib/utils";
 
 export const PersonalInfo = () => {
   const navigate = useNavigate();

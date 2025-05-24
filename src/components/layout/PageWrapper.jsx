@@ -1,6 +1,6 @@
 import { ArrowLeft, ArrowRight, Send } from "lucide-react";
-import { Button } from "./ui/button";
-import { Spinner } from "./ui/spinner";
+import { Button } from "../ui/button";
+import { Spinner } from "../ui/spinner";
 
 export const PageWrapper = ({
   children,

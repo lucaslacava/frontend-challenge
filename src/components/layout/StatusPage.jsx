@@ -1,7 +1,7 @@
 import { Button } from "@/components/ui/button";
 import { CheckCircle, RotateCcw, XCircle } from "lucide-react";
 import { useNavigate } from "react-router-dom";
-import { useForm } from "../context/FormContext";
+import { useForm } from "../../context/FormContext";
 
 export const StatusPage = ({ type, title, message, onButtonClick }) => {
   const navigate = useNavigate();

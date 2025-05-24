@@ -1,13 +1,13 @@
 import React from "react";
 import { BrowserRouter, Routes, Route, Navigate } from "react-router-dom";
 
-import { PersonalInfo } from "./steps/PersonalInfo";
-import { MoreInfo } from "./steps/MoreInfo";
-import { Confirmation } from "./steps/Confirmation";
-import { SuccessPage } from "./steps/SuccessPage";
-import { ErrorPage } from "./steps/ErrorPage";
-import { FormProvider } from "./context/FormContext";
-import { ProtectedRoute } from "./components/ProtectedRoute";
+import { PersonalInfo } from "@/pages/steps/PersonalInfo";
+import { MoreInfo } from "@/pages/steps/MoreInfo";
+import { Confirmation } from "@/pages/steps/Confirmation";
+import { Success } from "@/pages/Success";
+import { Error } from "@/pages/Error";
+import { FormProvider } from "@/context/FormContext";
+import { ProtectedRoute } from "@/components/ProtectedRoute";
 
 const App = () => {
   return (
@@ -42,7 +42,7 @@ const App = () => {
             path="/success"
             element={
               <ProtectedRoute step="success">
-                <SuccessPage />
+                <Success />
               </ProtectedRoute>
             }
           />
@@ -50,7 +50,7 @@ const App = () => {
             path="/error"
             element={
               <ProtectedRoute step="error">
-                <ErrorPage />
+                <Error />
               </ProtectedRoute>
             }
           />

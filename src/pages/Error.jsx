@@ -1,6 +1,6 @@
-import { StatusPage } from "../components/StatusPage";
+import { StatusPage } from "@/components/layout/StatusPage";
 
-export const ErrorPage = () => (
+export const Error = () => (
   <StatusPage
     type="error"
     title="Error!"

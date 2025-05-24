@@ -1,10 +1,10 @@
 import { useNavigate } from "react-router-dom";
-import { PageWrapper } from "../components/PageWrapper";
-import { Title } from "../components/Title";
-import { useForm } from "../context/FormContext";
+import { useForm } from "@/context/FormContext";
 import { useState } from "react";
-import { capitalizeFirstLetter } from "../lib/utils";
-import { SUBMIT_FORM } from "../api";
+import { capitalizeFirstLetter } from "@/lib/utils";
+import { PageWrapper } from "@/components/layout/PageWrapper";
+import { Title } from "@/components/layout/Title";
+import { submitForm } from "@/service/api";
 
 export const Confirmation = () => {
   const navigate = useNavigate();
@@ -14,18 +14,7 @@ export const Confirmation = () => {
   const handleSubmit = async () => {
     setIsLoading(true);
     try {
-      const response = await fetch(SUBMIT_FORM, {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify(formData),
-      });
-
-      if (!response.ok) {
-        throw new Error("Submission failed");
-      }
-
+      await submitForm(formData);
       navigate("/success");
     } catch (error) {
       console.error(error);

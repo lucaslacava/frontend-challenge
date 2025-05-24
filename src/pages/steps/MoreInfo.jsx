@@ -1,4 +1,5 @@
 import { useEffect, useState, useCallback } from "react";
+import { useNavigate } from "react-router-dom";
 import {
   Select,
   SelectTrigger,
@@ -6,14 +7,13 @@ import {
   SelectContent,
   SelectItem,
 } from "@/components/ui/select";
-import { PageWrapper } from "../components/PageWrapper";
-import { Title } from "../components/Title";
+import { PageWrapper } from "@/components/layout/PageWrapper";
+import { Title } from "@/components/layout/Title";
 import { Checkbox } from "@/components/ui/checkbox";
 import { Spinner } from "@/components/ui/Spinner";
-import { useForm } from "../context/FormContext";
-import { useNavigate } from "react-router-dom";
-import { capitalizeFirstLetter } from "../lib/utils";
-import { COLORS_API } from "../api";
+import { useForm } from "@/context/FormContext";
+import { capitalizeFirstLetter } from "@/lib/utils";
+import { fetchColors } from "@/service/api";
 
 export const MoreInfo = () => {
   const navigate = useNavigate();
@@ -32,11 +32,10 @@ export const MoreInfo = () => {
 
     const fetchColorOptions = async () => {
       setIsLoading(true);
-
       try {
-        const response = await fetch(COLORS_API);
-        const data = await response.json();
-        const sanitizedOptions = data.map((item) => ({
+        const colors = await fetchColors();
+
+        const sanitizedOptions = colors.map((item) => ({
           value: item,
           label: capitalizeFirstLetter(item),
         }));

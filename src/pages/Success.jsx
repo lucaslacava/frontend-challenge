@@ -1,6 +1,6 @@
-import { StatusPage } from "../components/StatusPage";
+import { StatusPage } from "@/components/layout/StatusPage";
 
-export const SuccessPage = () => (
+export const Success = () => (
   <StatusPage
     type="success"
     title="Success!"
