@@ -9,21 +9,13 @@ export const ProtectedRoute = ({ children, step }) => {
     switch (step) {
       case "personalInfo":
         return null;
-
       case "moreInfo":
-        return formData.name && formData.email ? null : "/";
-
+        if (!formData.name || !formData.email) return "/";
+        return null;
       case "confirmation":
       case "success":
       case "error":
-        if (
-          !formData.name ||
-          !formData.email ||
-          !formData.color ||
-          !formData.terms
-        ) {
-          return "/";
-        }
+        if (!formData.name || !formData.email) return "/";
         return null;
 
       default:

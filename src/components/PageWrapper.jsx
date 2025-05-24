@@ -20,13 +20,17 @@ export const PageWrapper = ({
         {children}
         <div className="flex space-x-4 mt-4 justify-start w-full">
           {onBack && (
-            <Button onClick={onBack} disabled={isLoading}>
+            <Button onClick={onBack} disabled={isLoading} type="button">
               <ArrowLeft className="size-4" />
               Back
             </Button>
           )}
           {onNext && (
-            <Button onClick={onNext} disabled={isLoading || isNextDisabled}>
+            <Button
+              type="submit"
+              onClick={onNext}
+              disabled={isLoading || isNextDisabled}
+            >
               {isLoading ? (
                 <>
                   <Spinner className="mr-2 h-4 w-4" />

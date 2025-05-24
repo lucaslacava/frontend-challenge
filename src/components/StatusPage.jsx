@@ -5,8 +5,10 @@ import { useForm } from "../context/FormContext";
 
 export const StatusPage = ({ type, title, message, onButtonClick }) => {
   const navigate = useNavigate();
-  const Icon = type === "success" ? CheckCircle : XCircle;
-  const iconColor = type === "success" ? "text-green-600" : "text-red-600";
+  const isSuccess = type === "success";
+  const Icon = isSuccess ? CheckCircle : XCircle;
+  const iconColor = isSuccess ? "text-green-600" : "text-red-600";
+
   const { resetForm } = useForm();
 
   const handleButtonClick = () => {
@@ -23,7 +25,6 @@ export const StatusPage = ({ type, title, message, onButtonClick }) => {
           <p className="text-lg">{message}</p>
         </div>
       </div>
-
       <Button onClick={onButtonClick ?? handleButtonClick} className="mt-8">
         Restart
         <RotateCcw className="size-4" />
