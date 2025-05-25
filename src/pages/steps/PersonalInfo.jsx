@@ -35,11 +35,13 @@ export const PersonalInfo = () => {
           placeholder="First name"
           value={name}
           onChange={(e) => setName(e.target.value)}
+          name="firstName"
           required
         />
         <Input
           placeholder="E-mail"
           value={email}
+          name="email"
           onChange={(e) => setEmail(e.target.value)}
           aria-invalid={email && !isValidEmail(email)}
           required
@@ -53,6 +55,7 @@ export const PersonalInfo = () => {
           placeholder="Password"
           value={password}
           type="password"
+          name="password"
           onChange={(e) => setPassword(e.target.value)}
           required
         />
