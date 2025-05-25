@@ -67,4 +67,4 @@ The application follows a modular component architecture:
 
 1. Run `yarn start` to start both frontend and mock server
 2. Use `yarn test` for running unit tests
-3. Run `yarn cypress:run` or `yarn cypress:open` to run e2e tests
+3. Run `yarn start` and `yarn cypress:run` or `yarn cypress:open` to run e2e tests
