@@ -25,10 +25,12 @@ export const StatusPage = ({ type, title, message, onButtonClick }) => {
           <p className="text-lg">{message}</p>
         </div>
       </div>
-      <Button onClick={onButtonClick ?? handleButtonClick} className="mt-8">
-        Restart
-        <RotateCcw className="size-4" />
-      </Button>
+      <div className="mt-8">
+        <Button onClick={onButtonClick ?? handleButtonClick}>
+          Restart
+          <RotateCcw className="size-4" />
+        </Button>
+      </div>
     </main>
   );
 };
