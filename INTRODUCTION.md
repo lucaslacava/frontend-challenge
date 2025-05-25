@@ -6,7 +6,7 @@
 - **Styling**: TailwindCSS for utility-first styling
 - **UI Components**: Custom components built with shadcn
 - **Routing**: React Router v7
-- **Testing**: Cypress
+- **Testing**: Jest + RTL (unit) and Cypress (e2e)
 
 ## Architecture Decisions
 
@@ -18,17 +18,18 @@ The application follows a modular component architecture:
   - `layout/`: layout components used in different pages
   - `ui/`: basic ui components from shadcn
 - `pages/`: Page-level components
-  - `steps/`: components for each step/page
+  - `steps/`: Components for each step/page of the form
 - `context/`: React Context provider for state management
-- `service/`: API and service layer
+- `service/`: API integration and service logic
 - `lib/`: Utility functions and shared logic
-- `/e2e`: Test cases and test utils
+- `/e2e`: E2E test cases and test utils
+- `/__tests__`: unit tests for components, utilities and services
 
 ### State Management
 
 - React Context is used for global state management
 - Local component state for UI-specific state
-- Color options were saved to the context to avoid refetching when moving back and forth steps ()
+- Color options were saved to the context to avoid refetching when navigating back and forth steps.
 
 ### Styling
 
@@ -38,7 +39,15 @@ The application follows a modular component architecture:
 
 ### Testing Strategy
 
-- Using Cypress to test e2e flow
+#### Unit Testing (Jest + RTL)
+
+- Test coverage includes layout components, utility functions, and API error handling.
+
+  ![unit tests log](/public/unit-tests-log.png)
+
+#### End-to-End Testing (Cypress)
+
+- Using Cypress to test e2e user flow, validations, error states, and routing:
 
   - Should complete the entire form flow successfully
   - Should handle form validation
@@ -57,5 +66,5 @@ The application follows a modular component architecture:
 ## Development Workflow
 
 1. Run `yarn start` to start both frontend and mock server
-2. Use `yarn test` for running tests
+2. Use `yarn test` for running unit tests
 3. Run `yarn cypress:run` or `yarn cypress:open` to run e2e tests
