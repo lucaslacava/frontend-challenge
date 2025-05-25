@@ -6,6 +6,7 @@
 - **Styling**: TailwindCSS for utility-first styling
 - **UI Components**: Custom components built with shadcn
 - **Routing**: React Router v7
+- **Testing**: Cypress
 
 ## Architecture Decisions
 
@@ -21,6 +22,7 @@ The application follows a modular component architecture:
 - `context/`: React Context provider for state management
 - `service/`: API and service layer
 - `lib/`: Utility functions and shared logic
+- `/e2e`: Test cases and test utils
 
 ### State Management
 
@@ -36,15 +38,24 @@ The application follows a modular component architecture:
 
 ### Testing Strategy
 
-- TBD
+- Using Cypress to test e2e flow
+
+  - Should complete the entire form flow successfully
+  - Should handle form validation
+  - Should handle navigation between steps
+  - Should handle error state
+  - Should validate More Info form fields
+
+- ![e2e tests log](/public/cypress-log.png)
 
 ## Extra Features
 
 - Email validation on first screen
 - Next button enabled only when fields are filled
-- Routes protected so the user cannnot go straight to `/confirmation` for example
+- Routes protected so the user cannnot go straight to `/confirmation`
 
 ## Development Workflow
 
 1. Run `yarn start` to start both frontend and mock server
 2. Use `yarn test` for running tests
+3. Run `yarn cypress:run` or `yarn cypress:open` to run e2e tests
